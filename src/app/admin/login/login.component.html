@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-4 mt-4 bg-dark text-white p-4">
+        <form (ngSubmit)="f.form.valid && login()" #f="ngForm">
+          <!-- Form content goes here -->
+          <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1">Email address</label>
+          <input type="email" [(ngModel)]="credentials.email" #email="ngModel" name="email" class="form-control" placeholder="Your Email" />
+          <span *ngIf="email.value  && email.valid" class="success-icon icon icon-checkbox"></span>
+          <span *ngIf="email.value && !email.valid" class="warning-icon icon icon-validate-error"></span>
+
+          </div>
+  
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example2">Password</label>
+            <input type="password" [(ngModel)]="credentials.password" #password="ngModel" name="passsword" class="form-control" placeholder="Your Password"/>
+            <div *ngIf="f.submitted && !password.valid" class="error-block">Please enter password.</div>
+          </div>
+  
+          
+  
+          <!-- Submit button -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  
