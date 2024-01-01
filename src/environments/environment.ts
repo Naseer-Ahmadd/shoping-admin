@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  version: require("../../package.json").version,
+  version: "1.0.0"
 };
 
 /*

@@ -6,15 +6,24 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from 'src/environments/environment';
+import { FireBaseConfig } from 'src/environments/firebase.config';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent
+    AdminComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+   
+    
+   
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
