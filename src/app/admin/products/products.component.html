@@ -1,1 +1,213 @@
-<p>products works!</p>
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add Product</h5>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="productName">Product Name</label>
+              <input type="text" class="form-control" id="productName" placeholder="Product Name">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="productPrice">Price</label>
+              <input type="text" class="form-control" id="productPrice" placeholder="Price">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea class="form-control" id="productDescription" placeholder="Product Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" class="form-control">
+              <option selected>Choose...</option>
+              <option>Electronics</option>
+              <option>Clothing</option>
+              <option>Home & Kitchen</option>
+              <!-- Add more categories as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="categoryTags">Tags</label>
+            <input type="text" class="form-control" id="categoryTags" placeholder="Tags (comma-separated)">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="productQuantity">Quantity</label>
+              <input type="number" class="form-control" id="productQuantity" placeholder="Quantity">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="productBrand">Brand</label>
+              <input type="text" class="form-control" id="productBrand" placeholder="Product Brand">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="discount">Discount</label>
+            <input type="text" class="form-control" id="discount" placeholder="Discount">
+          </div>
+          <div class="form-group">
+            <label for="image1">Image 1</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="image1" accept="image/*">
+              <label class="custom-file-label" for="image1">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image2">Image 2</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="image2" accept="image/*">
+              <label class="custom-file-label" for="image2">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="availableCheck">
+              <label class="form-check-label" for="availableCheck">
+                Available
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <!-- View Products -->
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Product List</h2>
+  
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Product Row 1 -->
+            <tr>
+              <th scope="row">1</th>
+              <td>Product 1</td>
+              <td>Description for Product 1.</td>
+              <td>$19.99</td>
+              <td>
+                <button class="btn btn-primary">Details</button>
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+  
+            <!-- Product Row 2 -->
+            <tr>
+              <th scope="row">2</th>
+              <td>Product 2</td>
+              <td>Description for Product 2.</td>
+              <td>$29.99</td>
+              <td>
+                <button class="btn btn-primary">Details</button>
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+  
+            <!-- Add more product rows as needed -->
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- CATEGORY -->
+
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add Category</h5>
+        <form>
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" placeholder="Category Name">
+          </div>
+          <div class="form-group">
+            <label for="categoryImage">Category Image</label>
+            <input type="file" class="form-control-file" id="categoryImage" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label for="categoryDescription">Category Description</label>
+            <textarea class="form-control" id="categoryDescription" placeholder="Category Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="parentCategoryID">Parent Category ID</label>
+            <select id="parentCategoryID" class="form-control">
+              <option selected>Select Parent Category</option>
+              <option value="1">Category 1</option>
+              <option value="2">Category 2</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="categoryTags">Tags</label>
+            <input type="text" class="form-control" id="categoryTags" placeholder="Tags (comma-separated)">
+          </div>
+          <button type="submit" class="btn btn-primary">Add Category</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Category -->
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Category List</h2>
+  
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Category Row 1 -->
+            <tr>
+              <th scope="row">1</th>
+              <td>Category 1</td>
+              <td>Description for Category 1.</td>
+              <td>
+                <button class="btn btn-primary">Details</button>
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+  
+            <!-- Category Row 2 -->
+            <tr>
+              <th scope="row">2</th>
+              <td>Category 2</td>
+              <td>Description for Category 2.</td>
+              <td>
+                <button class="btn btn-primary">Details</button>
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+  
+            <!-- Add more category rows as needed -->
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
