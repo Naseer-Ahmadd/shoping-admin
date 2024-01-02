@@ -116,7 +116,12 @@ export class DataService {
 
    getTimeStamp():string
    {
-    return firebase.firestore.FieldValue.serverTimestamp.toString()
+    var date = new Date();
+    var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
+                    date.getUTCDate(), date.getUTCHours(),
+                    date.getUTCMinutes(), date.getUTCSeconds());
+
+   return ""+now_utc
    }
    
 
@@ -138,6 +143,16 @@ export class DataService {
      return firebase.auth().currentUser?.uid || "NA"
    
    }
+   
 
 }
 
+export function getTimeStamp():string
+{
+ var date = new Date();
+ var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
+                 date.getUTCDate(), date.getUTCHours(),
+                 date.getUTCMinutes(), date.getUTCSeconds());
+
+return ""+now_utc
+}
