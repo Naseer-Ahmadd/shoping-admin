@@ -14,6 +14,11 @@ export class LoginComponent {
   pwd='wer@123#'
   constructor(private router: Router,private firebase:DataService){
 
+    let category:Category={
+      name: "JJJS",
+      description: 'jsjjs'
+    }
+    firebase.addCategory(category)
   
     
   }
