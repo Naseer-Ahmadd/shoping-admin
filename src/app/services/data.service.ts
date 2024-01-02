@@ -10,6 +10,8 @@ import 'firebase/firestore';
 import * as firebase from 'firebase';
 import { FireBaseConfig } from 'src/environments/firebase.config';
 import { Category } from './models/Category';
+import { finalize } from 'rxjs/operators';
+// import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

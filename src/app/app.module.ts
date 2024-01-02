@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
 import { FireBaseConfig } from 'src/environments/firebase.config';
+// import { AngularFireModule } from '@angular/fire/';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { FireBaseConfig } from 'src/environments/firebase.config';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-   
+    // AngularFireModule.initializeApp(FireBaseConfig),
     
    
     
