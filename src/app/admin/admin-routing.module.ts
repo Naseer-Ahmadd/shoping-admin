@@ -4,10 +4,10 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoryComponent } from './category/category.component';
-import { ShopComponent } from '../shop/shop.component';
-import { BrandsComponent } from '../brands/brands.component';
-import { LandingpageComponent } from '../landingpage/landingpage.component';
-import { CustomersComponent } from '../customers/customers.component';
+import { BrandsComponent } from './brands/brands.component';
+import { CustomersComponent } from './customers/customers.component';
+import { ShopComponent } from './shop/shop.component';
+import { LandingpageComponent } from './landingpage/landingpage.component';
 
 const routes: Routes = [
   { path: '',component: AdminComponent,

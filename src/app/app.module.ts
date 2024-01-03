@@ -9,10 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { FireBaseConfig } from 'src/environments/firebase.config';
 import { CategoryComponent } from './admin/category/category.component';
-import { ShopComponent } from './shop/shop.component';
-import { BrandsComponent } from './brands/brands.component';
-import { LandingpageComponent } from './landingpage/landingpage.component';
-import { CustomersComponent } from './customers/customers.component';
 
 // import { AngularFireModule } from '@angular/fire/';
 
