@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 //import { CollectionReference, Firestore,addDoc,collection, collectionData, documentId, getDocs, getFirestore} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, skip } from 'rxjs/operators';
 import { Product } from './models/Product';
 import { UserModel } from './models/User';
-import { PATH_CATEGORY,PATH_PRODUCTS,PATH_SHOP,PATH_USERS } from './models/Constants';
+import { PATH_CATEGORY,PATH_PRODUCTS,PATH_SHOP,PATH_SLOTS,PATH_USERS, SEQUENCE_KEY } from './models/Constants';
 import 'firebase/firestore'; 
 
 import * as firebase from 'firebase';
@@ -165,6 +165,72 @@ export class DataService {
           throw error;
         });
     }
+
+
+    /**
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * SLOTS 
+     */
+
+    private get getSlotsCollection() {
+      return this.db.collection(PATH_SLOTS);
+    }
+  
+    createSlot(slotData: any): Promise<string> {
+      this.addMeta(slotData)
+      slotData.id=this.getSlotsCollection.doc().id
+      return this.getSlotsCollection.doc(slotData.id)
+        .set(slotData)
+        .then(docRef => `Slot created with ID:${slotData.id}`)
+        .catch(error => Promise.reject(`Error creating slot: ${error.message}`));
+    }
+  
+    getSlots(): Promise<any[]> {
+      return this.getSlotsCollection.orderBy(SEQUENCE_KEY)
+        .get()
+        .then(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        .catch(error => Promise.reject(`Error getting slots: ${error.message}`));
+    }
+  
+    updateSlot(slotId: string, updatedData: any): Promise<string> {
+      this.addMeta(updatedData)
+      return this.getSlotsCollection
+        .doc(slotId)
+        .update(updatedData)
+        .then(() => 'Slot updated successfully')
+        .catch(error => Promise.reject(`Error updating slot: ${error.message}`));
+    }
+  
+    deleteSlot(slotId: string): Promise<string> {
+
+      return this.getSlotsCollection
+        .doc(slotId)
+        .delete()
+        .then(() => 'Slot deleted successfully')
+        .catch(error => Promise.reject(`Error deleting slot: ${error.message}`));
+    }
+
+    updateSlots(slots: any[]): Observable<void> {
+      const batch = this.db.batch()
+      slots.forEach((slot) => {
+        const slotRef = this.getSlotsCollection.doc(slot.id)
+        batch.update(slotRef, slot);
+      });
+  
+      return new Observable<void>((observer) => {
+        batch.commit().then(() => {
+          observer.next();
+          observer.complete();
+        });
+      });
+    }
+
+
 
     /**
      * 

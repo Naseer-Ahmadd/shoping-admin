@@ -1,43 +1,83 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="showForm">
     <div class="card">
-        <div class="card-header">
-            <h5 class="card-title">Slot Information</h5>
-        </div>
-        <div class="card-body">
-            <form>
-                <!-- Slot Heading -->
-                <div class="form-group">
-                    <label for="slotHeading">Slot Heading</label>
-                    <input type="text" class="form-control" id="slotHeading" placeholder="Enter Slot Heading">
-                </div>
-
-                <!-- Subheading -->
-                <div class="form-group">
-                    <label for="subheading">Subheading</label>
-                    <input type="text" class="form-control" id="subheading" placeholder="Enter Subheading">
-                </div>
-
-                <!-- Slot Type (Dropdown) -->
-                <div class="form-group">
-                    <label for="slotType">Slot Type</label>
-                  
-                        <select class="form-control" id="slotType">
-                            <option value="ImageCarousel">Image Carousel</option>
-                            <option value="SmallBanner">Small Banner</option>
-                            <option value="Products">Products</option>
-                        </select>
-                        
-                </div>
-
-                <!-- Sequence -->
-                <div class="form-group">
-                    <label for="sequence">Sequence</label>
-                    <input type="number" class="form-control" id="sequence" placeholder="Enter Sequence">
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-large">Submit</button>
-            </form>
-        </div>
+      <div class="card-header">
+        <h5 class="card-title">Slot Information</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-end mb-3">
+            <!-- Right-aligned Add Category Button -->
+            <button class="btn btn-primary" (click)="toggleForm()">Cancel</button>
+          </div>
+        <form [formGroup]="slotForm" (ngSubmit)="onSubmit()">
+          <!-- Slot Heading -->
+          <div class="form-group">
+            <label for="slotHeading">Slot Heading</label>
+            <input type="text" class="form-control" id="slotHeading" placeholder="Enter Slot Heading" formControlName="slotHeading">
+          </div>
+  
+          <!-- Subheading -->
+          <div class="form-group">
+            <label for="subheading">Subheading</label>
+            <input type="text" class="form-control" id="subheading" placeholder="Enter Subheading" formControlName="subheading">
+          </div>
+  
+          <!-- Slot Type (Dropdown) -->
+          <div class="form-group">
+            <label for="slotType">Slot Type</label>
+            <select class="form-control" id="slotType" formControlName="slotType">
+              <option value="1">Image Carousel</option>
+              <option value="2">Small Banner</option>
+              <option value="3">Products</option>
+            </select>
+          </div>
+  
+          <!-- Sequence -->
+          <div class="form-group">
+            <label for="sequence">Sequence</label>
+            <input type="number" class="form-control" id="sequence" placeholder="Enter Sequence" formControlName="sequence">
+          </div>
+  
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  
+
+  <div class="container mt-5" *ngIf="showForm==false">
+    <div class="card mt-4">
+      <div class="card-header">
+        <h5 class="card-title">Landing Page Slots</h5>
+        <h6>This is the main Page of your website and application</h6>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-end mb-3">
+            <!-- Right-aligned Add Category Button -->
+            <button class="btn btn-primary" (click)="toggleForm()">Add Slot</button>
+          </div>
+     
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Slot Heading</th>
+              <th>Subheading</th>
+              <th>Slot Type</th>
+            
+            </tr>
+          </thead>
+          <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+            <tr class="hover-effect" *ngFor="let slot of slots" cdkDrag>
+              <td>{{ slot.slotHeading }}</td>
+              <td>{{ slot.subheading }}</td>
+              <td *ngIf="slot.slotType==1">Image Caurosel</td>
+              <td *ngIf="slot.slotType==2">Small Banner</td>
+              <td *ngIf="slot.slotType==3">Product Slot</td>
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

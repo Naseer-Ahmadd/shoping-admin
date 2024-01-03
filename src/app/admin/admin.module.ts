@@ -5,7 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
 import { BrandsComponent } from './brands/brands.component';
 import { CustomersComponent } from './customers/customers.component';
@@ -22,13 +22,16 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
     CategoryComponent,
     ShopComponent,
     BrandsComponent,
-    LandingpageComponent,
+   
     CustomersComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    LandingpageComponent,
+
   ]
 })
 export class AdminModule { }
