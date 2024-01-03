@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from './models/Product';
 import { UserModel } from './models/User';
-import { PATH_CATEGORY,PATH_PRODUCTS,PATH_USERS } from './models/Constants';
+import { PATH_CATEGORY,PATH_PRODUCTS,PATH_SHOP,PATH_USERS } from './models/Constants';
 import 'firebase/firestore'; 
 
 import * as firebase from 'firebase';
 import { FireBaseConfig } from 'src/environments/firebase.config';
 import { Category } from './models/Category';
 import { finalize } from 'rxjs/operators';
+import { FirebaseStorageService } from './firebase.storage';
 // import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
@@ -21,11 +22,13 @@ import { finalize } from 'rxjs/operators';
 export class DataService {
   
   private db: firebase.firestore.Firestore;
+  private firebaseStorage:FirebaseStorageService
   constructor() {
     firebase.initializeApp(FireBaseConfig);
     this.db = firebase.firestore();
+      this.firebaseStorage=new FirebaseStorageService()
    
-   
+    
     
    
     }
@@ -51,10 +54,26 @@ export class DataService {
       return doc.exists ? ({ id: doc.id, ...doc.data() } as Category) : null;
     }
   
-    async addCategory(category: Category): Promise<string> {
-        const categoryId = category.id || this.getCategoriesCollection.doc().id;
-        category.id=categoryId
-        const docRef = await this.getCategoriesCollection.doc(categoryId).set(this.addMeta(category));
+    async addCategory(category: Category,file?:File): Promise<string> {
+       /**
+        * 
+        * PASS THE FILE THROUGH FILE VALIDATION RULES FIRST
+        * 
+        * 
+        */
+         if(!file){
+          return "Image not selected"
+         }
+
+          const categoryId = category.id || this.getCategoriesCollection.doc().id;
+          const url= this.firebaseStorage.uploadFile(file,categoryId)
+         url.then((imageUrl: string) => {
+           category.imageUrl=imageUrl
+           const docRef =  this.getCategoriesCollection.doc(categoryId).set(this.addMeta(category));
+         })
+         
+
+  
         return categoryId
     }
   
@@ -107,7 +126,45 @@ export class DataService {
     }
 
 
+    /**
+     * 
+     * 
+     * 
+     * SHOP INFORMATION
+     */
 
+    addShopInformation(formData: any): Promise<void> {
+      // Use the 'shops' collection in Firestore
+      const shopsCollection = this.db.collection(PATH_SHOP);
+  
+      // Add the shop information to the collection
+      return shopsCollection.doc("shopinformation").set(formData);
+    }
+
+    getShopInformation(): Promise<any> {
+      // Use the 'shops' collection in Firestore
+      const shopsCollection = this.db.collection(PATH_SHOP);
+    
+      // Get the document with ID "shopinformation" from the collection
+      const shopDocument = shopsCollection.doc("shopinformation");
+    
+      // Retrieve the data from the document
+      return shopDocument.get()
+        .then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            // Document exists, return the data
+            return docSnapshot.data();
+          } else {
+            // Document doesn't exist
+            return null;
+          }
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error("Error getting shop information:", error);
+          throw error;
+        });
+    }
 
     /**
      * 
@@ -145,6 +202,10 @@ export class DataService {
      return firebase.auth().currentUser?.uid || "NA"
    
    }
+
+
+
+
    
 
 }

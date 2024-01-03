@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
-// import { AngularFireStorage } from '@angular/fire/storage';
-import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
+import { FirebaseStorageService } from 'src/app/services/firebase.storage';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class ProductsComponent {
+export class CategoryComponent {
+  addCategory=false
   product: any = {};
   category: any = {};
   catId: any;
   allCategories: any = [];
   downloadURL: Observable<string>;
+  file:File | undefined
 
   constructor(
-    private dataService: DataService /* private storage: AngularFireStorage */
+    private dataService: DataService,
+    private storage:FirebaseStorageService
   ) {
     this.downloadURL = new Observable<string>();
   }
@@ -39,7 +41,7 @@ export class ProductsComponent {
     }
     console.log('values: in create', values);
     this.dataService
-      .addCategory(values)
+      .addCategory(values,this.file)
       .then((categoryId: string) => {
         this.catId = categoryId;
         console.log('Category added successfully with ID:', categoryId);
@@ -67,11 +69,13 @@ export class ProductsComponent {
   }
 
   editCategory(category: any) {
+    this.toggleAddCategory()
     console.log('category :', category);
     this.category = category;
   }
   updateCategory(catValue: any) {
     console.log('cattt :', catValue);
+  
     this.dataService
       .updateCategory(this.category.id, catValue)
       .then((res) => {
@@ -96,47 +100,11 @@ export class ProductsComponent {
       });
   }
 
-  async onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    // if (file) {
-    //   try {
-    //     const file = event.target.files[0];
-    //     var n = Date.now();
-
-    //     const filePath = `category-image/${Date.now()}`;
-    //     const fileRef = this.storage.ref(filePath);
-    //     const task = this.storage.upload(filePath, file);
-    //     task
-    //       .snapshotChanges()
-    //       .pipe(
-    //         finalize(() => {
-    //           this.downloadURL = fileRef.getDownloadURL();
-    //           this.downloadURL.subscribe((url) => {
-    //             if (url) {
-    //               this.category.imageUrl = url;
-    //             }
-    //             console.log('imageeeeeeee', this.category.imageUrl);
-    //           });
-    //         })
-    //       )
-    //       .subscribe((url) => {
-    //         if (url) {
-    //           console.log(url);
-    //         }
-    //       });
-    //   } catch (error) {
-    //     console.error('Error uploading image:', error);
-    //   }
-    // }
+  toggleAddCategory() {
+    this.addCategory = !this.addCategory;
   }
 
-
-  openFileInput(inputId:any) {
-    //document.getElementById(inputId).click();
-}
-
- handleFileInput(event:any) {
-    // Handle file input change here
-    // You can access the selected file using event.target.files[0]
-}
+  async onFileSelected(event: any) {
+    this.file= event.target.files[0];
+   }
 }
