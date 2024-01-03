@@ -72,8 +72,8 @@
           </thead>
           <tbody>
             <!-- Category Rows -->
-            <tr *ngFor="let cat of allCategories">
-              <th scope="row">1</th>
+            <tr *ngFor="let cat of allCategories; let i=index">
+              <th scope="row">{{i+ 1}}</th>
               <td>{{cat.name}}</td>
               <td>{{cat.description}}</td>
               <td>

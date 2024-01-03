@@ -99,7 +99,7 @@ export class DataService {
 
 
     private get getProductsCollection() {
-      return this.db.collection(PATH_CATEGORY);
+      return this.db.collection(PATH_PRODUCTS);
     }
 
     async getProducts(): Promise<Product[]> {
@@ -112,9 +112,10 @@ export class DataService {
       return doc.exists ? ({ id: doc.id, ...doc.data() } as Product) : null;
     }
   
-     async addProduct(product: Product): Promise<void> {
+     async addProduct(product: Product): Promise<string> {
        const productID=this.getProductsCollection.doc().id
-      await this.getProductsCollection.doc(productID).set(this.addMeta(product));
+       await this.getProductsCollection.doc(productID).set(this.addMeta(product));
+       return productID;
     }
   
     async updateProduct(productId: string, product: Partial<Product>): Promise<void> {

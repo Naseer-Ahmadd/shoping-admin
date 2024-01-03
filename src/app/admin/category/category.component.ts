@@ -46,6 +46,7 @@ export class CategoryComponent {
         this.catId = categoryId;
         console.log('Category added successfully with ID:', categoryId);
         this.getAllCategories();
+        this.toggleAddCategory()
         // Handle success here
       })
       .catch((error: any) => {
