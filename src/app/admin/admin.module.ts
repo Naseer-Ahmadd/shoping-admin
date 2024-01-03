@@ -10,6 +10,7 @@ import { CategoryComponent } from './category/category.component';
 import { ShopComponent } from '../shop/shop.component';
 import { BrandsComponent } from '../brands/brands.component';
 import { LandingpageComponent } from '../landingpage/landingpage.component';
+import { CustomersComponent } from '../customers/customers.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LandingpageComponent } from '../landingpage/landingpage.component';
     CategoryComponent,
     ShopComponent,
     BrandsComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    CustomersComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { CategoryComponent } from './category/category.component';
 import { ShopComponent } from '../shop/shop.component';
 import { BrandsComponent } from '../brands/brands.component';
 import { LandingpageComponent } from '../landingpage/landingpage.component';
+import { CustomersComponent } from '../customers/customers.component';
 
 const routes: Routes = [
   { path: '',component: AdminComponent,
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'landingpage',
         component: LandingpageComponent
+      },
+      {
+        path: 'customers',
+        component: CustomersComponent
       }
     
     ]

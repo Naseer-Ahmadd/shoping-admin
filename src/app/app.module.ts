@@ -12,6 +12,7 @@ import { CategoryComponent } from './admin/category/category.component';
 import { ShopComponent } from './shop/shop.component';
 import { BrandsComponent } from './brands/brands.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
+import { CustomersComponent } from './customers/customers.component';
 
 // import { AngularFireModule } from '@angular/fire/';
 
@@ -20,6 +21,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
   declarations: [
     AppComponent,
     AdminComponent,
+  
 
     
    
