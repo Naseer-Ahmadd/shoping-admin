@@ -116,7 +116,7 @@
               <th scope="row">{{ i + 1 }}</th>
               <td>{{product.name}}</td>
               <td>{{product.description}}</td>
-              <td>${{product.price}}</td>
+              <td>₹{{product.price}}</td>
               <td>
                 <button class="btn btn-primary" (click)="editProuct(product)">Edit</button>
                 <button class="btn btn-danger" (click)="openDeleteConfirmationModal(product)">Delete</button>
