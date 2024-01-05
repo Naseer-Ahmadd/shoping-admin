@@ -7,17 +7,18 @@
                     <h5 class="card-title">Add Brand</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form  #brandsForm="ngForm"
+                    (ngSubmit)="addBrand( brandsForm.form.value)">
                         <!-- Brand Name -->
                         <div class="form-group">
                             <label for="brandName">Brand Name</label>
-                            <input type="text" class="form-control" id="brandName" placeholder="Enter brand name">
+                            <input type="text" class="form-control" placeholder="Enter brand name"  id="name" placeholder="Product Name" [(ngModel)]="brand.name" #name="ngModel" name="name">
                         </div>
 
                         <!-- Brand Description -->
                         <div class="form-group">
                             <label for="brandDescription">Brand Description</label>
-                            <textarea class="form-control" id="brandDescription" rows="3" placeholder="Enter brand description"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Enter brand description" id="description" placeholder="Product Name" [(ngModel)]="brand.description" #description="ngModel" name="description"></textarea>
                         </div>
 
                         <!-- Brand Logo -->
@@ -51,12 +52,12 @@
                         </thead>
                         <tbody>
                             <!-- Example row, replace with actual data from your source -->
-                            <tr>
-                                <td>Brand 1</td>
-                                <td>Description for Brand 1</td>
+                            <tr *ngFor="let brand of allBrands; let i=index;">
+                                <td>{{brand.name}}</td>
+                                <td>{{brand.description}}</td>
                                 <td><img src="brand1-logo.jpg" alt="Brand 1 Logo" width="50"></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateBrandModal">Update</button>
+                                    <button (click)="openBrandModal(brand)" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateBrandModal">Update</button>
                                 </td>
                             </tr>
                             <!-- Add more rows for each brand -->
@@ -67,35 +68,35 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="updateBrandModalLabel">Update Brand</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <!-- Add your update form here -->
                                             <!-- Example update form -->
-                                            <form>
+                                            <form #brandsUpdateForm="ngForm"
+                                            (ngSubmit)="updateBrand( brandsUpdateForm.form.value)">
                                                 <div class="form-group">
                                                     <label for="updatedBrandName">Updated Brand Name</label>
-                                                    <input type="text" class="form-control" id="updatedBrandName" placeholder="Enter updated brand name">
+                                                    <input type="text" class="form-control" placeholder="Enter brand name"  id="name" placeholder="Product Name" [(ngModel)]="brand.name" #name="ngModel" name="name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="updatedBrandDescription">Updated Brand Description</label>
-                                                    <textarea class="form-control" id="updatedBrandDescription" rows="3" placeholder="Enter updated brand description"></textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="Enter brand description" id="description" placeholder="Product Name" [(ngModel)]="brand.description" #description="ngModel" name="description"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="updatedBrandLogo">Updated Brand Logo</label>
                                                     <input type="file" class="form-control-file" id="updatedBrandLogo">
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </tbody>
                     </table>
                 </div>

@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { Product } from './models/Product';
 import { UserModel } from './models/User';
-import { PATH_CATEGORY,PATH_PRODUCTS,PATH_SHOP,PATH_SLOTS,PATH_USERS, SEQUENCE_KEY } from './models/Constants';
+import { PATH_CATEGORY,PATH_PRODUCTS,PATH_SHOP,PATH_SLOTS,PATH_USERS, SEQUENCE_KEY, PATH_BRANDS } from './models/Constants';
 import 'firebase/firestore'; 
 
 import * as firebase from 'firebase';
 import { FireBaseConfig } from 'src/environments/firebase.config';
 import { Category } from './models/Category';
+import { Brand } from './models/Brand'
 import { finalize } from 'rxjs/operators';
 import { FirebaseStorageService } from './firebase.storage';
 // import { AngularFirestore } from '@angular/fire/firestore';
@@ -229,6 +230,45 @@ export class DataService {
           observer.complete();
         });
       });
+    }
+
+
+     /**
+     * 
+     * 
+     * 
+     * 
+     * 
+     * PRODUCTS SECTION
+     */
+
+
+    private get getBrandsCollection() {
+      return this.db.collection(PATH_BRANDS);
+    }
+
+    async getBrands(): Promise<Brand[]> {
+      const snapshot = await this.getBrandsCollection.get();
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Brand));
+    }
+  
+    async getBrandById(brandId: string): Promise<Brand | null> {
+      const doc = await this.getBrandsCollection.doc(brandId).get();
+      return doc.exists ? ({ id: doc.id, ...doc.data() } as Brand) : null;
+    }
+  
+     async addBrand(brand: Brand): Promise<string> {
+       const brandId=this.getBrandsCollection.doc().id
+       await this.getBrandsCollection.doc(brandId).set(this.addMeta(brand));
+       return brandId;
+    }
+  
+    async updateBrand(brandId: string, brand: Partial<Brand>): Promise<void> {
+        await this.getBrandsCollection.doc(brandId).update(this.addMeta(brand));
+    }
+  
+    async deleteBrand(brandId: string): Promise<void> {
+      await this.getBrandsCollection.doc(brandId).delete();
     }
 
 
