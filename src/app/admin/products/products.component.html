@@ -1,1 +1,151 @@
-<p>products works!</p>
+<div class="container mt-5" *ngIf="addProduct">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add Category</h5>
+        <div class="d-flex justify-content-end mb-3">
+            <!-- Right-aligned Add Category Button -->
+            <button class="btn btn-success" (click)="toggleAddProduct()">Cancel</button>
+          </div>
+        <form #productForm="ngForm"
+        (ngSubmit)="saveProduct(productForm.form.valid, productForm.form.value)">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="productName">Product Name</label>
+              <input type="text" class="form-control" id="productName" placeholder="Product Name" [(ngModel)]="product.name" #name="ngModel" name="name">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="productName">Product Code</label>
+              <input type="text" class="form-control" id="productCode" placeholder="Product Unique Code" [(ngModel)]="product.productCode" #productCode="ngModel" name="productCode">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="productPrice">Price</label>
+              <input type="number" class="form-control" id="price" placeholder="Price" [(ngModel)]="product.price" #price="ngModel" name="price">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea class="form-control" id="productDescription" placeholder="Product Description" [(ngModel)]="product.description"  #description="ngModel" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select name="categoryID" class="form-control"
+              [(ngModel)]="product.categoryID" required #categoryID="ngModel">
+            
+              <option value="0" selected>--Select--</option>
+               
+              <option value="{{category.id}}" *ngFor="let category of allCategories">
+                {{category.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productTags">Tags</label>
+            <input type="text" class="form-control" id="categoryTags" placeholder="Tags (comma-separated)"  [(ngModel)]="product.productTags" name="productTags"  #productTags="ngModel">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="productQuantity">Quantity</label>
+              <input type="number" class="form-control" id="productQuantity" placeholder="Quantity" [(ngModel)]="product.quantity"  #quantity="ngModel" name="quantity">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="productBrand">Brand</label>
+              <input type="text" class="form-control" id="productBrand" placeholder="Product Brand" [(ngModel)]="product.brand" name="brand"  #brand="ngModel">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="discount">Discount</label>
+            <input type="number" class="form-control" id="discount" placeholder="Discount" [(ngModel)]="product.discount" name="discount"  #discount="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="image1">Image 1</label>
+            <div class="custom-file">
+              <input type="file" class="form-control-file" id="image1" accept="image/*"  (change)="onFileSelected($event)">
+              <label class="custom-file-label" for="image1">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image2">Image 2</label>
+            <div class="custom-file">
+              <input type="file" class="form-control-file" id="image2" accept="image/*"   (change)="onFileSelected($event)">
+              <label class="custom-file-label" for="image2">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="availableCheck"  [(ngModel)]="product.isAvailable" name="isAvailable"  #isAvailable="ngModel">
+              <label class="form-check-label" for="availableCheck">
+                Available
+              </label>
+            </div>
+          </div>
+          <button *ngIf="product.id" type="submit" class="btn btn-primary">Update Product</button>
+          <button *ngIf="!product.id" type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <!-- View Products -->
+
+  <div class="container mt-5" *ngIf="!addProduct">
+    <h2 class="mb-4">Product List</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" (click)="toggleAddProduct()">Add Product</button>
+    </div>
+  
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr >
+              <th scope="col">#</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Product Row 1 -->
+            <tr *ngFor="let product of allproducts ; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{product.name}}</td>
+              <td>{{product.description}}</td>
+              <td>₹{{product.price}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="editProuct(product)">Edit</button>
+                <button class="btn btn-danger" (click)="openDeleteConfirmationModal(product)">Delete</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Delete</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this product?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProductConfirmed()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

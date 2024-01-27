@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
+import { Category } from 'src/app/services/models/Category';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,14 @@ export class LoginComponent {
   credentials: any = {};
   email='naseer.tlgt232@gmail.com'
   pwd='wer@123#'
-  constructor(private router: Router){
+  constructor(private router: Router,private firebase:DataService){
+
+    let category:Category={
+      name: "JJJS",
+      description: 'jsjjs'
+    }
+    firebase.addCategory(category)
+  
     
   }
   login() {

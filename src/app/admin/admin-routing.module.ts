@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
+import { CategoryComponent } from './category/category.component';
+import { BrandsComponent } from './brands/brands.component';
+import { CustomersComponent } from './customers/customers.component';
+import { ShopComponent } from './shop/shop.component';
+import { LandingpageComponent } from './landingpage/landingpage.component';
 
 const routes: Routes = [
   { path: '',component: AdminComponent,
@@ -20,6 +25,28 @@ const routes: Routes = [
         path: 'products',
         component: ProductsComponent,
       },
+      {
+        path: 'category',
+        component: CategoryComponent,
+      },
+      {
+        path: 'shop',
+        component: ShopComponent,
+      },
+      {
+        path: 'brands',
+        component: BrandsComponent
+      }
+      ,
+      {
+        path: 'landingpage',
+        component: LandingpageComponent
+      },
+      {
+        path: 'customers',
+        component: CustomersComponent
+      }
+    
     ]
   }
 

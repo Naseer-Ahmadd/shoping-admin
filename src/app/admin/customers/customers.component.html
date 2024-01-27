@@ -1,0 +1,107 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Customer Table</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows, replace with actual data from your source -->
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>johndoe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="customerActions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="customerActions">
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#markInactiveModal">Mark Inactive</button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#lastUsedModal">Last Used</button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#viewOrdersModal">View Orders</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Add more rows for each customer -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modals for Actions -->
+<!-- Modal for Mark Inactive -->
+<div class="modal fade" id="markInactiveModal" tabindex="-1" role="dialog" aria-labelledby="markInactiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="markInactiveModalLabel">Mark Customer Inactive</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add your form or confirmation message here -->
+                <p>Are you sure you want to mark this customer as inactive?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Yes, Mark Inactive</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Last Used -->
+<div class="modal fade" id="lastUsedModal" tabindex="-1" role="dialog" aria-labelledby="lastUsedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lastUsedModalLabel">Last Used Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add information about the last used date here -->
+                <p>Last used on: January 1, 2023</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for View Orders -->
+<div class="modal fade" id="viewOrdersModal" tabindex="-1" role="dialog" aria-labelledby="viewOrdersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewOrdersModalLabel">Customer Orders</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add information about the customer's orders here -->
+                <p>No orders found for this customer.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

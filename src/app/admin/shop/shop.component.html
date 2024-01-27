@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Shop Information</h5>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+                <!-- Shop Name -->
+                <div class="form-group">
+                    <label for="shopName">Shop Name</label>
+                    <input type="text" class="form-control" id="shopName" name="shopName" placeholder="Enter shop name" [(ngModel)]="formData.shopName" required>
+                </div>
+            
+                <!-- Shop Description -->
+                <div class="form-group">
+                    <label for="shopDescription">Shop Description</label>
+                    <textarea class="form-control" id="shopDescription" name="shopDescription" rows="3" placeholder="Enter shop description" [(ngModel)]="formData.shopDescription"></textarea>
+                </div>
+            
+                <!-- GST Number -->
+                <div class="form-group">
+                    <label for="gstNo">GST Number</label>
+                    <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST number" [(ngModel)]="formData.gstNo">
+                </div>
+            
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter shop address" [(ngModel)]="formData.address">
+                </div>
+            
+                <!-- Latitude and Longitude -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="latitude">Latitude</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Enter latitude" [(ngModel)]="formData.latitude">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="longitude">Longitude</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Enter longitude" [(ngModel)]="formData.longitude">
+                    </div>
+                </div>
+            
+                <!-- Contact Email -->
+                <div class="form-group">
+                    <label for="contactEmail">Contact Email</label>
+                    <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="Enter contact email" [(ngModel)]="formData.contactEmail">
+                </div>
+            
+                <!-- Contact Phone -->
+                <div class="form-group">
+                    <label for="contactPhone">Contact Phone</label>
+                    <input type="tel" class="form-control" id="contactPhone" name="contactPhone" placeholder="Enter contact phone" [(ngModel)]="formData.contactPhone">
+                </div>
+            
+                <!-- Registration Number -->
+                <div class="form-group">
+                    <label for="registrationNumber">Registration Number</label>
+                    <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" placeholder="Enter registration number" [(ngModel)]="formData.registrationNumber">
+                </div>
+            
+                <!-- Google Maps Key -->
+                <div class="form-group">
+                    <label for="googleMapsKey">Google Maps Key</label>
+                    <input type="text" class="form-control" id="googleMapsKey" name="googleMapsKey" placeholder="Enter Google Maps key" [(ngModel)]="formData.googleMapsKey">
+                </div>
+            
+                <!-- SMS Gateway Key -->
+                <div class="form-group">
+                    <label for="smsGatewayKey">SMS Gateway Key</label>
+                    <input type="text" class="form-control" id="smsGatewayKey" name="smsGatewayKey" placeholder="Enter SMS gateway key" [(ngModel)]="formData.smsGatewayKey">
+                </div>
+            
+                <!-- Email Gateway Key -->
+                <div class="form-group">
+                    <label for="emailGatewayKey">Email Gateway Key</label>
+                    <input type="text" class="form-control" id="emailGatewayKey" name="emailGatewayKey" placeholder="Enter email gateway key" [(ngModel)]="formData.emailGatewayKey">
+                </div>
+            
+                <!-- Delivery Charges -->
+                <div class="form-group">
+                    <label for="deliveryCharges">Delivery Charges</label>
+                    <input type="text" class="form-control" id="deliveryCharges" name="deliveryCharges" placeholder="Enter delivery charges" [(ngModel)]="formData.deliveryCharges">
+                </div>
+            
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block " style="width: 100%; margin-top: 20px;">Save Shop Information</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+  
