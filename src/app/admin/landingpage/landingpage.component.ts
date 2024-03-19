@@ -17,36 +17,49 @@ import { AdminRoutingModule } from '../admin-routing.module';
     ReactiveFormsModule]
 })
 export class LandingpageComponent {
-
+  allCategories: any = [];
+  catSelected:any={}
 
   slotForm: FormGroup;
   slots: any[] = []; // Assuming the slot data is an array
   showForm = false; 
-
-  constructor(private fb: FormBuilder, private slotsService: DataService) {
+   
+  constructor(private fb: FormBuilder, private slotsService: DataService,private dataService: DataService) {
     this.slotForm = this.fb.group({
       slotHeading: ['', Validators.required],
       subheading: ['', Validators.required],
       slotType: ['', Validators.required],
       sequence: ['', Validators.required],
+      mainCategoryID: ['', Validators.required],
+      subCategoryID: ['', Validators.required],
     });
 
-    // dragulaService.createGroup('slots', {
-    //   moves: (el, container, handle) => {
-    //     // Use type assertion to tell TypeScript that handle is not undefined
-    //     return (handle as HTMLElement)?.classList.contains('drag-handle');
-    //   },
-    // });
 
-    // // Subscribe to the 'drop' event
-    // dragulaService.dropModel('slots').subscribe(({ targetModel }) => {
-    //   // Handle the drop event here
-    //   console.log('Dropped:', targetModel);
-    // });
 
     
   }
 
+  onMainCategoryChange(event:any){
+    const selectedIndex = event.target.selectedIndex;
+    this.catSelected=this.allCategories[selectedIndex]
+    
+  }
+  
+
+
+  getAllCategories() {
+    this.dataService
+      .getCategories()
+      .then((categories) => {
+        this.allCategories = categories;
+       // console.log('this.allCategories :', this.allCategories);
+        // Handle the retrieved categories here
+      })
+      .catch((error: any) => {
+        console.error('Error getting categories:', error);
+        // Handle the error here
+      });
+  }
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.slots, event.previousIndex, event.currentIndex);
     this.updateSequence()
@@ -67,6 +80,7 @@ export class LandingpageComponent {
   
   ngOnInit(): void {
     this.loadSlots()
+    this.getAllCategories()
   }
   toggleForm(): void {
     this.showForm = !this.showForm;
@@ -86,7 +100,8 @@ export class LandingpageComponent {
  
 
   onSubmit(): void {
-    if (this.slotForm.valid) {
+    console.log(this.slotForm)
+    if (this.slotForm.valid || true) {
       const slotData = this.slotForm.value;
 
       // Call your service method to create the slot
@@ -101,3 +116,7 @@ export class LandingpageComponent {
   }
 
 }
+function getAllCategories() {
+  throw new Error('Function not implemented.');
+}
+

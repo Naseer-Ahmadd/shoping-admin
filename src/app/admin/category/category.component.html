@@ -73,16 +73,34 @@
           <tbody>
             <!-- Category Rows -->
             <tr *ngFor="let cat of allCategories; let i=index">
-              <th scope="row">{{i+ 1}}</th>
+              <th scope="row">{{i+ 1}} {{cat.id}}</th>
               <td>{{cat.name}}</td>
               <td>{{cat.description}}</td>
               <td>
-                <button class="btn btn-primary" (click)="editCategory(cat)">Update</button>
-                <button class="btn btn-danger" (click)="deleteCategory(cat)">Delete</button>
+              
+                <button class="btn btn-danger" (click)="openCategoryInfoModel(cat)">More</button>
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="catInfoModel" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteConfirmationModalLabel">Category: {{catSelected.name}} </h5>
+        </div>
+        <div class="modal-body">
+          Please choose an action you want to perform
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Edit</button>
+          <button type="button" class="btn btn-danger" >View Sub Categories</button>
+          <button type="button" class="btn btn-danger" >Cancel</button>
+     
+        </div>
       </div>
     </div>
   </div>

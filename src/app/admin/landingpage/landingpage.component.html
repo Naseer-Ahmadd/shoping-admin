@@ -25,16 +25,29 @@
           <div class="form-group">
             <label for="slotType">Slot Type</label>
             <select class="form-control" id="slotType" formControlName="slotType">
-              <option value="1">Image Carousel</option>
-              <option value="2">Small Banner</option>
-              <option value="3">Products</option>
+              <!-- <option value="1">Image Carousel</option>
+              <option value="2">Small Banner</option> -->
+              <option selected ="3">Products</option>
             </select>
           </div>
   
-          <!-- Sequence -->
+         
           <div class="form-group">
-            <label for="sequence">Sequence</label>
-            <input type="number" class="form-control" id="sequence" placeholder="Enter Sequence" formControlName="sequence">
+            <label for="slotType">Choose Category</label>
+            <select class="form-control" id="slotTypeMainCategory" formControlName="mainCategoryID" (change)="onMainCategoryChange($event)">
+              <!-- <option value="1">Image Carousel</option>
+              <option value="2">Small Banner</option> -->
+              <option value="{{mainCat.id}}" *ngFor="let mainCat of allCategories">{{mainCat.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="slotType">Choose Sub Category Category</label>
+            <select class="form-control" id="slotSubCategory" formControlName="subCategoryID">
+              <!-- <option value="1">Image Carousel</option>
+              <option value="2">Small Banner</option> -->
+              <option value="{{suCat.id}}" *ngFor="let suCat of catSelected.subCats">{{suCat.name}}</option>
+            </select>
           </div>
   
           <!-- Submit Button -->

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseStorageService } from 'src/app/services/firebase.storage';
-
+declare var $: any;
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -16,6 +16,9 @@ export class CategoryComponent {
   allCategories: any = [];
   downloadURL: Observable<string>;
   file:File | undefined
+  catSelected:any={
+      name:""
+  }
 
   constructor(
     private dataService: DataService,
@@ -108,4 +111,11 @@ export class CategoryComponent {
   async onFileSelected(event: any) {
     this.file= event.target.files[0];
    }
+
+
+   openCategoryInfoModel(cat: any) {
+    this. catSelected = cat;
+    $('#catInfoModel').modal('show');
+  }
+   
 }
