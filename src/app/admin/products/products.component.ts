@@ -80,7 +80,7 @@ export class ProductsComponent {
   }
 
   updateSubCat(id:any){
-    this.product.subCatId = id
+    this.product.subCatId = Number(id)
   }
 
   saveProduct(isValid: any, values: any){
@@ -110,6 +110,7 @@ export class ProductsComponent {
 
   editProuct(product:any){
     this.product = product
+    console.log('this.product :', this.product);
     this.toggleAddProduct()
   }
 
