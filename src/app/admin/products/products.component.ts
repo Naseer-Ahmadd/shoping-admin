@@ -163,6 +163,7 @@ export class ProductsComponent {
     const uploadedImage = await this.storage.uploadFile(event.target.files[0], 'prod-images');
     this.images[this.images[0] ? 1 : 0] = uploadedImage;
     this.product.productImages = this.images;
+    this.product.image_url = this.images[0]
     this.spinner.hide();
 
   }
