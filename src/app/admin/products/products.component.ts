@@ -21,6 +21,7 @@ export class ProductsComponent {
   images: any = []
   productToDelete: any;
   parentCategoryID: any;
+  subCats: any;
   constructor(
     private dataService: DataService, private storage: FirebaseStorageService,
     private spinner: NgxSpinnerService,private toastrService: ToastrService
@@ -66,16 +67,22 @@ export class ProductsComponent {
   }
 
   updateCat(catId:any){
-    this.parentCategoryID =this.getParentCatId(catId)
+    this.parentCategoryID = this.getParentCatId(catId)
   }
 
   getParentCatId(id:any){
     let cat = this.allCategories.find((cat: { id: any; }) =>cat.id === id)
+    this.subCats = cat.subCats
     const l0CatMatch = cat.deeplink.match(/l0_cat=(\d+)/);
     if (l0CatMatch && l0CatMatch[1]) {
       return l0CatMatch[1];
     }
   }
+
+  updateSubCat(id:any){
+    this.product.subCatId = id
+  }
+
   saveProduct(isValid: any, values: any){
     if(this.product.id){
       console.log('inn update :', );

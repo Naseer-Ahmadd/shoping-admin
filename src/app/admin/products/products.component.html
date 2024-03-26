@@ -47,6 +47,16 @@
               </option>
             </select>
           </div>
+          <div class="form-group" *ngIf="parentCategoryID">
+            <label for="productCategory">Sub Category</label>
+            <select name="subCatId" class="form-control"
+              [(ngModel)]="product.subCatId" required #subCatId="ngModel" (change)="updateSubCat(product.subCatId)">
+              <option value="0" selected>--Select--</option>
+              <option value="{{category.id}}" *ngFor="let category of subCats">
+                {{category.name}}
+              </option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="productTags">Tags</label>
             <input type="text" class="form-control" id="categoryTags" placeholder="Tags (comma-separated)"  [(ngModel)]="product.productTags" name="productTags"  #productTags="ngModel">
