@@ -20,6 +20,7 @@ export class ProductsComponent {
   file:File | undefined
   images: any = []
   productToDelete: any;
+  parentCategoryID: any;
   constructor(
     private dataService: DataService, private storage: FirebaseStorageService,
     private spinner: NgxSpinnerService,private toastrService: ToastrService
@@ -37,7 +38,11 @@ export class ProductsComponent {
     this.dataService.getProducts() 
     .then((products) => {
       this.allproducts = products;
-      console.log('this.allproductssss :', this.allproducts);
+      this.allproducts.sort((a:any, b:any) => {
+        const timestampA = a.creationDate;
+        const timestampB = b.creationDate;
+        return timestampB - timestampA; // Descending order (latest first)
+    });
       this.spinner.hide();
       // Handle the retrieved products here
     })
@@ -60,6 +65,17 @@ export class ProductsComponent {
       });
   }
 
+  updateCat(catId:any){
+    this.parentCategoryID =this.getParentCatId(catId)
+  }
+
+  getParentCatId(id:any){
+    let cat = this.allCategories.find((cat: { id: any; }) =>cat.id === id)
+    const l0CatMatch = cat.deeplink.match(/l0_cat=(\d+)/);
+    if (l0CatMatch && l0CatMatch[1]) {
+      return l0CatMatch[1];
+    }
+  }
   saveProduct(isValid: any, values: any){
     if(this.product.id){
       console.log('inn update :', );
@@ -68,6 +84,10 @@ export class ProductsComponent {
     }
     console.log('inn create :', );
     if(this.product){
+      if(this.parentCategoryID){
+        this.product.parentCategoryID = Number(this.parentCategoryID)
+      }    
+      this.product.created_at = Date.now()
       this.spinner.show();
       this.dataService.addProduct(this.product).then(res=>{
         this.toastrService.success('Producted Added Successfully!', 'Title Success!');
@@ -88,6 +108,10 @@ export class ProductsComponent {
 
   async updateProduct(prod:any){
     try {
+      if(this.parentCategoryID){
+        prod.parentCategoryID = Number(this.parentCategoryID)
+      }
+      prod.updated_at = new Date()
       this.spinner.show();
       await this.dataService.updateProduct(prod.id, prod)
       this.toastrService.success('Product Updateed Successfully!', 'Title Success!');

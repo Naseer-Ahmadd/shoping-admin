@@ -11,7 +11,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="productName">Product Name</label>
-              <input type="text" class="form-control" id="productName" placeholder="Product Name" [(ngModel)]="product.name" #name="ngModel" name="name">
+              <input type="text" class="form-control" id="productName" placeholder="Product Name" [(ngModel)]="product.productName" #productName="ngModel" name="productName">
             </div>
 
             <div class="form-group col-md-6">
@@ -28,9 +28,17 @@
             <textarea class="form-control" id="productDescription" placeholder="Product Description" [(ngModel)]="product.description"  #description="ngModel" name="description"></textarea>
           </div>
           <div class="form-group">
+            <label for="productFeatures">Key Features</label>
+            <textarea class="form-control" id="Key Features" placeholder="Product Description" [(ngModel)]="product.key_features"  #key_features="ngModel" name="key_features"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productUnit">Unit</label>
+            <input type="number" class="form-control" id="unit" placeholder="unit" [(ngModel)]="product.unit"  #unit="ngModel" name="unit">
+          </div>
+          <div class="form-group">
             <label for="productCategory">Category</label>
             <select name="categoryID" class="form-control"
-              [(ngModel)]="product.categoryID" required #categoryID="ngModel">
+              [(ngModel)]="product.categoryID" required #categoryID="ngModel" (change)="updateCat(product.categoryID)">
             
               <option value="0" selected>--Select--</option>
                
@@ -105,7 +113,7 @@
             <tr >
               <th scope="col">#</th>
               <th scope="col">Product Name</th>
-              <th scope="col">Description</th>
+              <!-- <th scope="col">Description</th> -->
               <th scope="col">Price</th>
               <th scope="col">Actions</th>
             </tr>
@@ -114,8 +122,8 @@
             <!-- Product Row 1 -->
             <tr *ngFor="let product of allproducts ; let i = index">
               <th scope="row">{{ i + 1 }}</th>
-              <td>{{product.name}}</td>
-              <td>{{product.description}}</td>
+              <td>{{product.productName}}</td>
+              <!-- <td>{{product.description || product.attributes.description}}</td> -->
               <td>₹{{product.price}}</td>
               <td>
                 <button class="btn btn-primary" (click)="editProuct(product)">Edit</button>

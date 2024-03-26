@@ -104,7 +104,7 @@ export class DataService {
     }
 
     async getProducts(): Promise<Product[]> {
-      const snapshot = await this.getProductsCollection.get();
+      const snapshot = await this.getProductsCollection.limit(20).get();
       return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Product));
     }
   
