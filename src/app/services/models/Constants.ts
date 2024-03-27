@@ -1,4 +1,4 @@
-export const PATH_PRODUCTS="Products"
+export const PATH_PRODUCTS="products"
 export const PATH_CATEGORY="Categories"
 export const PATH_USERS="users"
 export const PATH_ORDERS="orders"

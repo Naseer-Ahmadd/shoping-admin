@@ -129,6 +129,7 @@ export class ProductsComponent {
       this.product={}
     } catch (error) {
       this.toastrService.error('Error in Update', 'Title Error!');
+      this.spinner.hide();
     }
   }
 
